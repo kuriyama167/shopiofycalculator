@@ -1,0 +1,341 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BMI Calculator</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    .tabs {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+
+    .tab {
+      cursor: pointer;
+      padding: 10px 20px;
+      background-color: #4caf50;
+      color: #fff;
+      border: none;
+      border-radius: 5px 5px 0 0;
+      margin-right: 10px;
+    }
+
+    .tab.active {
+      background-color: #45a049;
+    }
+
+    .calculator {
+      background-color: #fff;
+      padding: 20px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+      text-align: center;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 10px;
+    }
+
+    input {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 20px;
+    }
+
+    button {
+      background-color: #4caf50;
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    #result {
+      font-weight: bold;
+      margin-top: 20px;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <p>
+      Have you ever wondered how to gauge if your weight is within a healthy range
+      for your height? Enter Body Mass Index (BMI), a widely used tool for this
+      very purpose. BMI is a simple calculation that can provide a quick estimate
+      of body fat and has become a standard metric in health assessments. But what
+      exactly does BMI tell us, and how should it be interpreted?
+    </p>
+    <h2>What is BMI?</h2>
+    <p><strong>Definition and Calculation</strong></p>
+    <p>
+      BMI is a numerical value derived from a person's weight and height. It's
+      calculated by dividing a person's weight in kilograms by the square of their
+      height in meters.
+    </p>
+    <p class="formula">BMI = (Weight in kg) / (Height in m)²</p>
+    <h2>Understanding BMI Ranges</h2>
+    <p>The World Health Organization (WHO) classifies BMI ranges as follows:</p>
+    <ul>
+      <li>Underweight: BMI less than 18.5</li>
+      <li>Normal weight: BMI 18.5–24.9</li>
+      <li>Overweight: BMI 25–29.9</li>
+      <li>Obesity: BMI 30 or more</li>
+    </ul>
+    <h2>Benefits of Knowing Your BMI</h2>
+    <p>
+      <strong>Health Screening Tool:</strong> BMI is a quick and non-invasive
+      method for assessing potential health risks associated with being
+      underweight, overweight, or obese.
+    </p>
+    <p>
+      <strong>Guidance for Weight Management:</strong> It can guide individuals in
+      setting realistic weight management goals.
+    </p>
+    <p>
+      <strong>Epidemiological Tool:</strong> On a larger scale, BMI helps in
+      understanding and managing public health trends related to weight.
+    </p>
+    <h2>Relevant Image Suggestion</h2>
+    <p>
+      A visual chart displaying BMI categories (underweight, normal, overweight,
+      obesity) with corresponding BMI ranges.
+    </p>
+    <h2>Considerations When Using BMI</h2>
+    <p>
+      While BMI is a valuable tool, it's essential to consider its limitations:
+    </p>
+    <ul>
+      <li>
+        <strong>Does Not Measure Body Fat Directly:</strong> BMI does not
+        distinguish between muscle and fat. Therefore, muscular individuals might
+        be classified as overweight or obese.
+      </li>
+      <li>
+        <strong>Not Reflective of Body Fat Distribution:</strong> BMI doesn’t
+        account for where fat is distributed in the body, which is an important
+        factor in health risk assessment.
+      </li>
+      <li>
+        <strong>Age and Sex Differences:</strong> BMI ranges can be less accurate
+        for certain groups, like the elderly or young adults.
+      </li>
+    </ul>
+    <h2>Practical Recommendation</h2>
+    <p>
+      It's advisable to use BMI as a starting point and combine it with other
+      assessments like waist circumference, diet evaluation, and physical activity
+      levels for a comprehensive health evaluation.
+    </p>
+  <div class="tabs">
+    <button class="tab active" onclick="openTab('us')">US Units</button>
+    <button class="tab" onclick="openTab('metric')">Metric Units</button>
+  </div>
+
+  <div id="us" class="calculator">
+    <h2>BMI Calculator - US Units</h2>
+    <label for="us_gender">Gender: </label>
+    <select id="us_gender">
+      <option value="male">Male</option>
+      <option value="female">Female</option>
+    </select>
+
+    <label for="us_age">Age: </label>
+    <input type="text" id="us_age" placeholder="Enter age">
+
+    <label for="us_feet">Height (ft): </label>
+    <input type="text" id="us_feet" placeholder="Feet">
+    <label for="us_inches">Height (in): </label>
+    <input type="text" id="us_inches" placeholder="Inches">
+
+    <label for="us_weight">Weight (lb): </label>
+    <input type="text" id="us_weight" placeholder="Enter weight in pounds">
+
+    
+    <button onclick="calculateBMI('us')">Calculate BMI</button>
+
+    <div id="us_result"></div>
+  </div>
+
+  <div id="metric" class="calculator" style="display:none;">
+    <h2>BMI Calculator - Metric Units</h2>
+    <label for="metric_gender">Gender: </label>
+    <select id="metric_gender">
+      <option value="male">Male</option>
+      <option value="female">Female</option>
+    </select>
+
+    <label for="metric_age">Age: </label>
+    <input type="text" id="metric_age" placeholder="Enter age">
+
+    <label for="metric_height">Height (cm): </label>
+    <input type="text" id="metric_height" placeholder="Enter height in centimeters">
+
+    <label for="metric_weight">Weight (kg): </label>
+    <input type="text" id="metric_weight" placeholder="Enter weight in kilograms">
+
+    
+    <button onclick="calculateBMI('metric')">Calculate BMI</button>
+
+    <div id="metric_result"></div>
+  </div>
+  <section>
+  <h2>Relevant Image Suggestion</h2>
+  <p>
+    An interactive BMI calculator interface where users can input their height
+    and weight.
+  </p>
+  <h2>Potential Drawbacks and Misinterpretations</h2>
+  <ul>
+    <li>
+      <strong>Overemphasis on Weight:</strong> BMI might lead to an overemphasis
+      on weight rather than overall health and fitness.
+    </li>
+    <li>
+      <strong>Mental Health Considerations:</strong> Focusing solely on BMI can
+      contribute to anxiety and unhealthy behaviors, especially in individuals
+      prone to body image issues.
+    </li>
+  </ul>
+  <h2>Practical Advice</h2>
+  <p>
+    Balance BMI awareness with a holistic view of health, considering factors
+    like diet quality, physical activity, and mental well-being.
+  </p>
+  <h2>Practical Recommendations: How to Use BMI Effectively</h2>
+  <ul>
+    <li>
+      <strong>Consult Healthcare Professionals:</strong> Always discuss BMI
+      results with a healthcare provider for personalized advice.
+    </li>
+    <li>
+      <strong>Combine with Lifestyle Assessments:</strong> Use BMI in
+      conjunction with lifestyle habits assessment to get a comprehensive health
+      picture.
+    </li>
+    <li>
+      <strong>Regular Monitoring:</strong> Regularly monitor BMI as part of a
+      broader health check-up routine.
+    </li>
+  </ul>
+  <p>
+    <img
+      alt="Weight Scale"
+      src="https://cdn.shopify.com/s/files/1/0110/6844/0640/files/Vision_Board_Photo_Collage_14fcca76-f1e8-4649-ac40-e89867e0a1fb_480x480.jpg?v=1709049744"
+    />
+  </p>
+  <h2></h2>
+  <h2>Conclusion: A Tool, Not a Verdict</h2>
+  <p>
+    BMI is a valuable, albeit imperfect, tool for assessing weight-related
+    health risks. It should be used judiciously, in combination with other
+    health indicators, for a balanced approach to well-being.
+  </p>
+  <h2>Final Rhetorical Question</h2>
+  <p>
+    Is your BMI telling the whole story of your health, or is it just one piece
+    of a larger puzzle?
+  </p>
+</section>
+
+  <script>
+    function openTab(tabName) {
+      var tabs = document.getElementsByClassName('tab');
+      for (var i = 0; i < tabs.length; i++) {
+        tabs[i].classList.remove('active');
+      }
+
+      var calculators = document.getElementsByClassName('calculator');
+      for (var i = 0; i < calculators.length; i++) {
+        calculators[i].style.display = 'none';
+      }
+
+      document.getElementById(tabName).style.display = 'block';
+      document.querySelector('button.tab[data-tab="' + tabName + '"]').classList.add('active');
+    }
+
+    function calculateBMI(tabName) {
+      var feetInput = document.getElementById('us_feet');
+      var inchesInput = document.getElementById('us_inches');
+      var weightInput = document.getElementById(tabName + '_weight');
+      var genderSelect = document.getElementById(tabName + '_gender');
+      var ageInput = document.getElementById(tabName + '_age');
+      var resultDiv = document.getElementById(tabName + '_result');
+
+      var weightInputMetrics = document.getElementById('metric_weight');
+      var HeightInputMetrics = document.getElementById('metric_height');
+
+      var feet = parseFloat(feetInput.value);
+      var inches = parseFloat(inchesInput.value);
+      var weight = parseFloat(weightInput.value);
+      var gender = genderSelect.value;
+      var age = parseInt(ageInput.value);
+
+
+      var HeightMetrics = parseFloat( HeightInputMetrics.value);
+      var weightMetrics = parseFloat(weightInputMetrics.value);
+
+      if (isNaN(feet) || isNaN(inches) || isNaN(weight) || feet < 0 || inches < 0 || weight <= 0 || age <= 0) {
+        resultDiv.innerText = 'Please enter valid height, weight, and age.';
+        return;
+      } 
+      
+      
+      // Convert height to inches
+      var heightInInches = feet * 12 + inches;
+
+      var bmi;
+
+      if (tabName === 'us') {
+        bmi = (weight / (heightInInches * heightInInches)) * 703; // For US units
+      } else if (tabName === 'metric') {
+        // Convert height to meters and weight to kilograms
+        var heightInMeters = HeightMetrics /100; // Convert inches to meters
+        //var weightInKg = weight * 0.453592; // Convert lbs to kg
+        bmi =   weightInputMetrics/ (heightInMeters * heightInMeters); // For Metric units
+      }
+      
+  
+
+      bmi = bmi.toFixed(2);
+
+      var resultMessage = 'Your BMI is ' + bmi + '. ' + 'Gender: ' + gender + ', Age: ' + age;;
+      if (bmi < 18.5) {
+      resultMessage += "You are underweight.";
+    } else if (bmi >= 18.5 && bmi <= 24.9) {
+      resultMessage += "You have a normal weight.";
+    } else if (bmi >= 25 && bmi <= 29.9) {
+      resultMessage += "You are overweight.";
+    } else {
+      resultMessage += "You are obese.";
+    }
+
+    resultDiv.innerText = resultMessage;
+
+      // Include gender and age in the result message
+   
+    }
+ 
+    openTab('us'); // By default, open the US tab
+  </script>
+</body>
+</html>
